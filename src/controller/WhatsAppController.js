@@ -160,7 +160,18 @@ class WhatsAppController {
             
             let formData = new formData(this.el.formPanelAddContact);
 
+        });
 
+        this.el.contactsMessagesList.querySelectorAll('.contact-item').forEach(item=>{
+
+            item.on('click', e=>{
+
+                this.el.home.hide()
+                this.el.main.css({
+                    display:'flex'
+                });
+
+            });
 
         });
 
