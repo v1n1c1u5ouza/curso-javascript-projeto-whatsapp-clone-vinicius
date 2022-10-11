@@ -9,7 +9,15 @@ class CameraController {
             this._videoEl.play()
         }).catch(err => {
             console.error(err)
-        })
+        });
+    }
+
+    stop(){
+
+        this._screenStream.getTracks().forEach(track=>{
+            track.stop();
+        });
+
     }
 
 }
