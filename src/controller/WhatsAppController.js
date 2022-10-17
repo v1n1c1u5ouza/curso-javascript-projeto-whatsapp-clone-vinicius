@@ -1,4 +1,8 @@
-class WhatsAppController {
+import { Format } from './../utils/Format';
+import { CameraController } from './CameraController';
+import { DocumentPreviewController } from './DocumentPreviewController';
+
+export class WhatsAppController {
 
     constructor(){
 
@@ -258,6 +262,32 @@ class WhatsAppController {
             this.el.panelDocumentPreview.css({
                 'height':'100%'
             });
+            this.el.inputDocument.click();
+
+        });
+
+        this.el.inputDocument.on('change', e=>{
+
+            if (this.el.inputDocument.files.length) {
+
+                let file = this.el.inputDocument.files[0];
+
+                this._documentPreviewController = new DocumentPreviewController (file);
+
+                this._documentPreviewController.getPreviewData().then(result=>{
+
+                    this.el.imgPanelDocumentPreview.src = result.src;
+                    this.el.infoPanelDocumentPreview.innerHTML = result.info;
+                    this.el.imagePanelDocumentPreview.show();
+                    this.el.filePanelDocumentPreview.hide();
+
+                }).catch(err=>{
+
+                    console.log('err', err);
+
+                });
+                
+            }
 
         });
 
